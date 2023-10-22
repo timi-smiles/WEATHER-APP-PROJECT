@@ -10,16 +10,18 @@ const API_KEY = '51c04fd515b2e1c7d6f475beee32c9cc';  // API key for OpenWeatherM
 
 const createWeatherCard = (cityName, weatherItem, index) =>{
     if (index === 0){   //HTML FOR THE MAIN CARD
-        return `<div class="details">
+        return `
+                <div class="details">
                     <h2>${cityName} (${weatherItem.dt_txt.split('')[0]})</h2>
                     <h4>Temp: ${(weatherItem.main.temp - 273.15).toFixed(2)}*C</h4>
                     <h4>Wind:  ${weatherItem.wind.speed}M/S</h4>
-                    <h4>Humidity: ${weatherItem.main.humidity}%</h4>
+                    <h4>Humidity: ${weatherItem.main.humidity}%</h4> 
                 </div>
                 <div class="icon">
                     <img src="https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}4x.png">
                     <h4>${weatherItem.weather[0].description}</h4>
                 </div>`;
+
     }else{      //HTML FOR THE 5 DAYS CARD
         return ` <li class="card">
                     <h3>${weatherItem.dt_txt}</h3>
@@ -55,7 +57,7 @@ const getWeatherDetails = (cityName, lat, lon) => {
         // CREATING WEATHER CARD AND ADDING THEM TO DOM
         fiveDaysForecast.forEach((weatherItem, index) => {
             if (index === 0) {
-                weatherCardDivs.insertAdjacentHTML('beforeend', createWeatherCard(cityName, weatherItem, index));
+                currentWeatherDiv.insertAdjacentHTML('beforeend', createWeatherCard(cityName, weatherItem, index));
             } else {
                 weatherCardDivs.insertAdjacentHTML('beforeend', createWeatherCard(cityName, weatherItem, index));
             }
@@ -116,8 +118,7 @@ const getUserCoordinates = () => {
     );
 }
 
-locationBtn.addEventListener('click', getUserCoordinates);
+// locationBtn.addEventListener('click', getUserCoordinates);
 // locationBtn.addEventListener("click", getUserCoordinates);
-searchBtn.addEventListener('click', getCityCoordinates);
 searchBtn.addEventListener('click', getCityCoordinates);
 cityInput.addEventListener('keyup', e => e.key === "Enter" && getCityCoordinates)

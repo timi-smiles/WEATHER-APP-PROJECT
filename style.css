@@ -71,6 +71,7 @@ h1{
 }
 .weather-data{
     width: 100%;
+
 }
 .current-weather{
     color: #fff;
@@ -79,6 +80,7 @@ h1{
     display: flex;
     border-radius: 6px;
     justify-content: space-between;
+
 
 }
 .current-weather h2{
